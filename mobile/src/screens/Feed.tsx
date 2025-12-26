@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { StyleSheet, ScrollView, SafeAreaView, RefreshControl, Text, View } from 'react-native';
+import { StyleSheet, ScrollView, SafeAreaView, RefreshControl, Text, View, Platform, StatusBar } from 'react-native';
 import { useFeedStore } from '../store/useFeedStore';
 import { feedPosts } from '../mocks/feedPosts';
 import PostItem from '../components/feed/PostItem';
@@ -37,6 +37,7 @@ const Feed: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.safeArea}>
+      <StatusBar barStyle="dark-content" backgroundColor="#E3F2FD" />
       <ScrollView
         style={styles.container}
         contentContainerStyle={[
@@ -65,6 +66,7 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
     backgroundColor: '#E3F2FD',
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
   container: {
     flex: 1,
